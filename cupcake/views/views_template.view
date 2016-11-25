@@ -1,0 +1,269 @@
+<?php
+$view = new view();
+$view->name = 'cupcake_administration';
+$view->description = '';
+$view->tag = 'default';
+$view->base_table = 'node';
+$view->human_name = 'Cupcake Administration';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'Cupcake Administration';
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Reiniciar';
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['style_plugin'] = 'table';
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+/* Sort criterion: Content: Post date */
+$handler->display->display_options['sorts']['created']['id'] = 'created';
+$handler->display->display_options['sorts']['created']['table'] = 'node';
+$handler->display->display_options['sorts']['created']['field'] = 'created';
+$handler->display->display_options['sorts']['created']['order'] = 'DESC';
+/* Filter criterion: Content: Published */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'node';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = 1;
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: Content: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'node';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'client' => 'client',
+);
+
+/* Display: Sales */
+$handler = $view->new_display('page', 'Sales', 'page');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Sales';
+$handler->display->display_options['defaults']['header'] = FALSE;
+$handler->display->display_options['defaults']['footer'] = FALSE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Nid */
+$handler->display->display_options['fields']['nid']['id'] = 'nid';
+$handler->display->display_options['fields']['nid']['table'] = 'node';
+$handler->display->display_options['fields']['nid']['field'] = 'nid';
+$handler->display->display_options['fields']['nid']['label'] = '';
+$handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+$handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Consecutive';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = 'Client';
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '.',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Link */
+$handler->display->display_options['fields']['view_node']['id'] = 'view_node';
+$handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
+$handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+$handler->display->display_options['fields']['view_node']['label'] = '';
+$handler->display->display_options['fields']['view_node']['text'] = 'view';
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = '';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'Generate Invoice';
+$handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'invoice-pdf/[nid]';
+$handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Content: Published */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'node';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = 1;
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: Content: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'node';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'purchase' => 'purchase',
+);
+$handler->display->display_options['path'] = 'cupcake/sales';
+
+/* Display: Cupcakes */
+$handler = $view->new_display('page', 'Cupcakes', 'page_1');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Our Cupcakes';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Nid */
+$handler->display->display_options['fields']['nid']['id'] = 'nid';
+$handler->display->display_options['fields']['nid']['table'] = 'node';
+$handler->display->display_options['fields']['nid']['field'] = 'nid';
+$handler->display->display_options['fields']['nid']['label'] = '';
+$handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+$handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Content: Cupcake Description */
+$handler->display->display_options['fields']['description']['id'] = 'description';
+$handler->display->display_options['fields']['description']['table'] = 'field_data_description';
+$handler->display->display_options['fields']['description']['field'] = 'description';
+$handler->display->display_options['fields']['description']['label'] = 'Description';
+/* Field: Content: Cupcake Price */
+$handler->display->display_options['fields']['price']['id'] = 'price';
+$handler->display->display_options['fields']['price']['table'] = 'field_data_price';
+$handler->display->display_options['fields']['price']['field'] = 'price';
+$handler->display->display_options['fields']['price']['label'] = 'Price';
+$handler->display->display_options['fields']['price']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Cupcake Discount */
+$handler->display->display_options['fields']['discount']['id'] = 'discount';
+$handler->display->display_options['fields']['discount']['table'] = 'field_data_discount';
+$handler->display->display_options['fields']['discount']['field'] = 'discount';
+$handler->display->display_options['fields']['discount']['label'] = 'Discount';
+$handler->display->display_options['fields']['discount']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = '';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'edit';
+$handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'edit/cupcake/[nid]';
+$handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Content: Published */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'node';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = 1;
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: Content: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'node';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'Cupcake' => 'Cupcake',
+);
+$handler->display->display_options['path'] = 'cupcake/cupcakes';
+
+/* Display: Clients */
+$handler = $view->new_display('page', 'Clients', 'page_2');
+$handler->display->display_options['defaults']['title'] = FALSE;
+$handler->display->display_options['title'] = 'Clients';
+$handler->display->display_options['defaults']['header'] = FALSE;
+$handler->display->display_options['defaults']['footer'] = FALSE;
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Nid */
+$handler->display->display_options['fields']['nid']['id'] = 'nid';
+$handler->display->display_options['fields']['nid']['table'] = 'node';
+$handler->display->display_options['fields']['nid']['field'] = 'nid';
+$handler->display->display_options['fields']['nid']['label'] = '';
+$handler->display->display_options['fields']['nid']['exclude'] = TRUE;
+$handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+/* Field: Content: Client identification */
+$handler->display->display_options['fields']['identification']['id'] = 'identification';
+$handler->display->display_options['fields']['identification']['table'] = 'field_data_identification';
+$handler->display->display_options['fields']['identification']['field'] = 'identification';
+$handler->display->display_options['fields']['identification']['label'] = 'identification';
+$handler->display->display_options['fields']['identification']['settings'] = array(
+  'thousand_separator' => ',',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Client Name */
+$handler->display->display_options['fields']['client_name']['id'] = 'client_name';
+$handler->display->display_options['fields']['client_name']['table'] = 'field_data_client_name';
+$handler->display->display_options['fields']['client_name']['field'] = 'client_name';
+$handler->display->display_options['fields']['client_name']['label'] = 'Name';
+/* Field: Content: Client Last Name */
+$handler->display->display_options['fields']['client_last_name']['id'] = 'client_last_name';
+$handler->display->display_options['fields']['client_last_name']['table'] = 'field_data_client_last_name';
+$handler->display->display_options['fields']['client_last_name']['field'] = 'client_last_name';
+$handler->display->display_options['fields']['client_last_name']['label'] = 'Last Name';
+/* Field: Content: Client Email */
+$handler->display->display_options['fields']['client_email']['id'] = 'client_email';
+$handler->display->display_options['fields']['client_email']['table'] = 'field_data_client_email';
+$handler->display->display_options['fields']['client_email']['field'] = 'client_email';
+$handler->display->display_options['fields']['client_email']['label'] = 'Email';
+/* Field: Content: Client Addres */
+$handler->display->display_options['fields']['client_addres']['id'] = 'client_addres';
+$handler->display->display_options['fields']['client_addres']['table'] = 'field_data_client_addres';
+$handler->display->display_options['fields']['client_addres']['field'] = 'client_addres';
+$handler->display->display_options['fields']['client_addres']['label'] = 'Addres';
+/* Field: Content: Client Tel */
+$handler->display->display_options['fields']['client_tel']['id'] = 'client_tel';
+$handler->display->display_options['fields']['client_tel']['table'] = 'field_data_client_tel';
+$handler->display->display_options['fields']['client_tel']['field'] = 'client_tel';
+$handler->display->display_options['fields']['client_tel']['label'] = 'Tel';
+/* Field: Content: Client Cel */
+$handler->display->display_options['fields']['client_cel']['id'] = 'client_cel';
+$handler->display->display_options['fields']['client_cel']['table'] = 'field_data_client_cel';
+$handler->display->display_options['fields']['client_cel']['field'] = 'client_cel';
+$handler->display->display_options['fields']['client_cel']['label'] = 'Cel';
+$handler->display->display_options['fields']['client_cel']['settings'] = array(
+  'thousand_separator' => ',',
+  'prefix_suffix' => 1,
+);
+/* Field: Global: Custom text */
+$handler->display->display_options['fields']['nothing']['id'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['table'] = 'views';
+$handler->display->display_options['fields']['nothing']['field'] = 'nothing';
+$handler->display->display_options['fields']['nothing']['label'] = '';
+$handler->display->display_options['fields']['nothing']['alter']['text'] = 'edit';
+$handler->display->display_options['fields']['nothing']['alter']['make_link'] = TRUE;
+$handler->display->display_options['fields']['nothing']['alter']['path'] = 'edit/client/[nid]';
+$handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
+$handler->display->display_options['path'] = 'cupcake/clients';

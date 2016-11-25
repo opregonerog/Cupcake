@@ -1,0 +1,212 @@
+<?php 
+
+function cupcake_init() { 
+    form_load_include($form_state, 'inc', 'node', 'node.pages');
+}
+
+/**
+ * Implements hook_menu().
+ */
+
+function cupcake_menu() {
+   
+	$items['add/Cupcake'] = array(
+      'title' => 'Add Cupcake',
+      'page callback' => 'load_form',
+      'page arguments' => array('Cupcake'),
+      'access callback' => 'menu_access_regular_employer',
+      'type' => MENU_NORMAL_ITEM,
+      'menu_name' => 'navigation',
+    );
+
+    $items['add/client'] = array(
+      'title' => 'Add Client',
+      'page callback' => 'load_form',
+      'page arguments' => array('client'),
+      'access callback' => 'menu_access_regular_employer',
+      'type' => MENU_NORMAL_ITEM,
+      'menu_name' => 'navigation',
+    );   
+
+    $items['add/purchase'] = array(
+      'title' => 'Add Purchase',
+      'page callback' => 'load_form',
+      'page arguments' => array('purchase'),
+      'access callback' => 'menu_access_regular_employer',
+      'type' => MENU_NORMAL_ITEM,
+      'menu_name' => 'navigation',
+    );  
+
+    $items['edit/cupcake/%'] = array(
+      'title' => 'Edit Cupcake',
+      'page callback' => 'edit_form',      
+      'page arguments' => array('Cupcake',2),
+      'access callback' => 'menu_access_regular_employer',
+      'type' => MENU_NORMAL_ITEM,     
+    );
+
+    $items['edit/client/%'] = array(
+      'title' => 'Edit Client',
+      'page callback' => 'edit_form',      
+      'page arguments' => array('client',2),
+      'access callback' => 'menu_access_regular_employer',
+      'type' => MENU_NORMAL_ITEM,     
+    );
+
+    $items['edit/purchase/%'] = array(
+      'title' => 'Edit Cupcake',
+      'page callback' => 'edit_form',      
+      'page arguments' => array('purchase',2),
+      'access callback' => 'menu_access_regular_employer',
+      'type' => MENU_NORMAL_ITEM,          
+    );
+
+    $items['list/cupcakes'] = array(
+        'title' => 'List Cupcakes',
+        'page callback' => 'views_page',
+        'page arguments' => array('cupcake_administration', 'page_1'),
+        'access callback' => 'menu_access_regular_employer',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['list/clients'] = array(
+        'title' => 'List Clients',
+        'page callback' => 'views_page',
+        'page arguments' => array('cupcake_administration', 'page_2'),
+        'access callback' => 'menu_access_regular_employer',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['list/sales'] = array(
+        'title' => 'List Purchase',
+        'page callback' => 'views_page',
+        'page arguments' => array('cupcake_administration', 'page'),
+        'access callback' => 'menu_access_regular_employer',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['list/cupcakes'] = array(
+        'title' => 'List Cupcakes',
+        'page callback' => 'views_page',
+        'page arguments' => array('cupcake_administration', 'page_1'),
+        'access callback' => 'menu_access_regular_employer',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['report/monthly_sales_filter'] = array(
+        'title' => 'Monthly Sales(filter)',
+        'page callback' => 'views_page',
+        'page arguments' => array('reports', 'page'),
+        'access callback' => 'menu_access_cupcake_administrator',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['report/monthly_sales_group'] = array(
+        'title' => 'Monthly Sales(group)',
+        'page callback' => 'views_page',
+        'page arguments' => array('reports', 'page_3'),
+        'access callback' => 'menu_access_cupcake_administrator',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['report/invoices_by_client_count'] = array(
+        'title' => 'Invoices by Client(count)',
+        'page callback' => 'views_page',
+        'page arguments' => array('reports', 'page_1'),
+        'access callback' => 'menu_access_cupcake_administrator',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['report/invoices_by_client_group'] = array(
+        'title' => 'Invoices by Client(group)',
+        'page callback' => 'views_page',
+        'page arguments' => array('reports', 'page_2'),
+        'access callback' => 'menu_access_cupcake_administrator',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+
+    $items['report/cupcake_ranking_sales'] = array(
+        'title' => 'Cupcake ranking sales',
+        'page callback' => 'views_page',
+        'page arguments' => array('reports', 'page_4'),
+        'access callback' => 'menu_access_cupcake_administrator',
+        'type' => MENU_NORMAL_ITEM,
+        'menu_name' => 'navigation',
+    );
+    
+    return $items;
+}
+
+function load_form($nodetype){
+ 		module_load_include('inc', 'node', 'node.pages');
+    $node = new stdClass;
+  	$node->type=$nodetype;
+  	return drupal_get_form($nodetype.'_node_form', $node);
+}
+
+function edit_form($nodetype,$nid){
+    module_load_include('inc', 'node', 'node.pages');
+    $node = node_load($nid);
+    return drupal_get_form($nodetype.'_node_form', $node);
+}
+
+/**
+* Implements of hook_views_api()
+**/
+
+Function cupcake_views_api(){
+	return array('api' => 3.0);
+}
+
+
+
+/**
+* Implements hook_views_default_views().
+**/
+
+function cupcake_views_default_views() {
+
+	$files = file_scan_directory(drupal_get_path('module','cupcake').'/views','/.view/');
+	foreach($files as $filepath => $file) {
+		require $filepath;
+		if(isset($view)) {
+			$views[$view->name] = $view;
+		}
+	}
+
+	if($views) {
+		return $views;
+	}
+
+}
+
+function cupcake_form_alter(&$form,&$form_state,&$form_id) {      
+  if($form_id=='client_node_form') {     
+      $form_state['redirect'] = "list/clients";}
+  if($form_id=='Cupcake_node_form')
+      $form_state['redirect'] = "list/cupcakes";
+  if($form_id=='purchase_node_form')
+      $form_state['redirect'] = "list/sales";
+}
+
+function menu_access_regular_employer() {
+  $regular_employer = user_role_load_by_name('regular_employer');  
+  if(user_has_role($regular_employer->rid))
+    return true;
+}
+
+function menu_access_cupcake_administrator() {  
+  $cupcake_admin = user_role_load_by_name('cupcake_administrator');
+  if(user_has_role($cupcake_admin->rid))
+    return true;
+}
+
+

@@ -1,0 +1,23 @@
+name = Cupcake
+description = Cupcake Store
+core = 7.x
+package = Opregonerog
+dependencies[] = views
+dependencies[] = bigint
+dependencies[] = date
+dependencies[] = email
+dependencies[] = date
+dependencies[] = entityreference
+dependencies[] = phpexcel
+dependencies[] = views
+dependencies[] = field_collection
+dependencies[] = views_export_xls
+dependencies[] = views_pdf
+dependencies[] = views_php
+
+ 
+; Information add the Module.
+version = "7.x-1.0"
+project = "Cupcake"
+
+

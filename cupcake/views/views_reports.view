@@ -1,0 +1,1826 @@
+<?php
+$view = new view();
+$view->name = 'reports';
+$view->description = '';
+$view->tag = 'default';
+$view->base_table = 'node';
+$view->human_name = 'Reports';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+/* Display: Master */
+$handler = $view->new_display('default', 'Master', 'default');
+$handler->display->display_options['title'] = 'Reports';
+$handler->display->display_options['use_more_always'] = FALSE;
+$handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['cache']['type'] = 'none';
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['exposed_form']['type'] = 'basic';
+$handler->display->display_options['pager']['type'] = 'none';
+$handler->display->display_options['style_plugin'] = 'default';
+$handler->display->display_options['row_plugin'] = 'fields';
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = '';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+/* Filter criterion: Content: Published */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'node';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = 1;
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: Content: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'node';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'purchase' => 'purchase',
+);
+
+/* Display: Monthly Sales(filter) */
+$handler = $view->new_display('page', 'Monthly Sales(filter)', 'page');
+$handler->display->display_options['display_description'] = 'Show all the sales with a date exposed filter ';
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['columns'] = array(
+  'title' => 'title',
+  'cupcake_collections' => 'cupcake_collections',
+  'purchase_client' => 'purchase_client',
+  'purchase_date' => 'purchase_date',
+  'purchase_total' => 'purchase_total',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'title' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'cupcake_collections' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_client' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_date' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_total' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['footer'] = FALSE;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area']['id'] = 'area';
+$handler->display->display_options['footer']['area']['table'] = 'views';
+$handler->display->display_options['footer']['area']['field'] = 'area';
+$handler->display->display_options['footer']['area']['content'] = '<a href="monthly-sales-pdf">Generar Pdf</a>
+<a href="monthly-sales-xls">Generar Excel</a>';
+$handler->display->display_options['footer']['area']['format'] = 'full_html';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Consecutive';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+/* Field: Content: Cupcake Collection Nodes */
+$handler->display->display_options['fields']['cupcake_collections']['id'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['field'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['label'] = 'Cupcakes';
+$handler->display->display_options['fields']['cupcake_collections']['type'] = 'field_collection_fields';
+$handler->display->display_options['fields']['cupcake_collections']['settings'] = array(
+  'view_mode' => 'full',
+);
+$handler->display->display_options['fields']['cupcake_collections']['delta_offset'] = '0';
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Content: Published */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'node';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = 1;
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: Content: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'node';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'purchase' => 'purchase',
+);
+/* Filter criterion: Content: Purchase Date  (purchase_date) */
+$handler->display->display_options['filters']['purchase_date_value']['id'] = 'purchase_date_value';
+$handler->display->display_options['filters']['purchase_date_value']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['filters']['purchase_date_value']['field'] = 'purchase_date_value';
+$handler->display->display_options['filters']['purchase_date_value']['exposed'] = TRUE;
+$handler->display->display_options['filters']['purchase_date_value']['expose']['operator_id'] = 'purchase_date_value_op';
+$handler->display->display_options['filters']['purchase_date_value']['expose']['label'] = 'Purchase Date  ';
+$handler->display->display_options['filters']['purchase_date_value']['expose']['operator'] = 'purchase_date_value_op';
+$handler->display->display_options['filters']['purchase_date_value']['expose']['identifier'] = 'purchase_date_value';
+$handler->display->display_options['filters']['purchase_date_value']['expose']['remember_roles'] = array(
+  2 => '2',
+  1 => 0,
+  7 => 0,
+  6 => 0,
+  3 => 0,
+);
+$handler->display->display_options['path'] = 'monthly-sales';
+
+/* Display: Monthly Sales(group) */
+$handler = $view->new_display('page', 'Monthly Sales(group)', 'page_3');
+$handler->display->display_options['display_description'] = 'Invoices group by Month';
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'php',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['columns'] = array(
+  'title' => 'title',
+  'php' => 'php',
+  'cupcake_collections' => 'cupcake_collections',
+  'purchase_client' => 'purchase_client',
+  'purchase_date' => 'purchase_date',
+  'purchase_total' => 'purchase_total',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'title' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'php' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'cupcake_collections' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_client' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_date' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_total' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['footer'] = FALSE;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area']['id'] = 'area';
+$handler->display->display_options['footer']['area']['table'] = 'views';
+$handler->display->display_options['footer']['area']['field'] = 'area';
+$handler->display->display_options['footer']['area']['content'] = '<a href="monthly-sales-2-pdf">Generar Pdf</a>
+';
+$handler->display->display_options['footer']['area']['format'] = 'full_html';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Consecutive';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = 'Year-Month';
+$handler->display->display_options['fields']['php']['exclude'] = TRUE;
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+
+$date = ($data->_field_data["nid"]["entity"]->purchase_date["und"][0]["value"]);
+$dates = explode(\'-\',$date);
+print $dates[0]." ".$dates[1]; 
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+/* Field: Content: Cupcake Collection Nodes */
+$handler->display->display_options['fields']['cupcake_collections']['id'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['field'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['label'] = 'Cupcakes';
+$handler->display->display_options['fields']['cupcake_collections']['type'] = 'field_collection_fields';
+$handler->display->display_options['fields']['cupcake_collections']['settings'] = array(
+  'view_mode' => 'full',
+);
+$handler->display->display_options['fields']['cupcake_collections']['delta_offset'] = '0';
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = 'Client';
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '.',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['path'] = 'monthly-sales-2';
+
+/* Display: Inovices by Client(count) */
+$handler = $view->new_display('page', 'Inovices by Client(count)', 'page_1');
+$handler->display->display_options['display_description'] = 'Show the total invoices of the clients';
+$handler->display->display_options['defaults']['group_by'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['defaults']['pager'] = FALSE;
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['pager']['options']['items_per_page'] = '0';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'default';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'purchase_client',
+    'rendered' => 0,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['row_plugin'] = 'fields';
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['footer'] = FALSE;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area']['id'] = 'area';
+$handler->display->display_options['footer']['area']['table'] = 'views';
+$handler->display->display_options['footer']['area']['field'] = 'area';
+$handler->display->display_options['footer']['area']['content'] = '<a href="invoices-by-client-pdf">Generar Pdf</a>
+';
+$handler->display->display_options['footer']['area']['format'] = 'filtered_html';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = '';
+$handler->display->display_options['fields']['purchase_client']['exclude'] = TRUE;
+$handler->display->display_options['fields']['purchase_client']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client_1']['id'] = 'purchase_client_1';
+$handler->display->display_options['fields']['purchase_client_1']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client_1']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client_1']['group_type'] = 'count';
+$handler->display->display_options['fields']['purchase_client_1']['label'] = 'Total Invoices';
+$handler->display->display_options['fields']['purchase_client_1']['separator'] = ', ';
+$handler->display->display_options['path'] = 'invoices-by-client';
+
+/* Display: Inovices by Client (group) */
+$handler = $view->new_display('page', 'Inovices by Client (group)', 'page_2');
+$handler->display->display_options['display_description'] = 'Invoices group by client';
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'table';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'purchase_client',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['columns'] = array(
+  'title' => 'title',
+  'purchase_client' => 'purchase_client',
+  'purchase_date' => 'purchase_date',
+  'cupcake_collections' => 'cupcake_collections',
+  'purchase_total' => 'purchase_total',
+);
+$handler->display->display_options['style_options']['default'] = '-1';
+$handler->display->display_options['style_options']['info'] = array(
+  'title' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_client' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_date' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'cupcake_collections' => array(
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+  'purchase_total' => array(
+    'sortable' => 0,
+    'default_sort_order' => 'asc',
+    'align' => '',
+    'separator' => '',
+    'empty_column' => 0,
+  ),
+);
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['footer'] = FALSE;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area']['id'] = 'area';
+$handler->display->display_options['footer']['area']['table'] = 'views';
+$handler->display->display_options['footer']['area']['field'] = 'area';
+$handler->display->display_options['footer']['area']['content'] = '<a href="invoices-by-client-2-pdf">Generar Pdf</a>';
+$handler->display->display_options['footer']['area']['format'] = 'filtered_html';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = '';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = '';
+$handler->display->display_options['fields']['purchase_client']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Cupcake Collection Nodes */
+$handler->display->display_options['fields']['cupcake_collections']['id'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['field'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['label'] = 'Cupcakes';
+$handler->display->display_options['fields']['cupcake_collections']['type'] = 'field_collection_fields';
+$handler->display->display_options['fields']['cupcake_collections']['settings'] = array(
+  'view_mode' => 'full',
+);
+$handler->display->display_options['fields']['cupcake_collections']['delta_offset'] = '0';
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '.',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['path'] = 'invoices-by-client-2';
+
+/* Display: Cupcake ranking sales */
+$handler = $view->new_display('page', 'Cupcake ranking sales', 'page_4');
+$handler->display->display_options['defaults']['group_by'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['defaults']['style_plugin'] = FALSE;
+$handler->display->display_options['style_plugin'] = 'default';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'cupcake_collection_nodes',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['defaults']['style_options'] = FALSE;
+$handler->display->display_options['defaults']['row_plugin'] = FALSE;
+$handler->display->display_options['row_plugin'] = 'fields';
+$handler->display->display_options['defaults']['row_options'] = FALSE;
+$handler->display->display_options['defaults']['footer'] = FALSE;
+/* Footer: Global: Text area */
+$handler->display->display_options['footer']['area']['id'] = 'area';
+$handler->display->display_options['footer']['area']['table'] = 'views';
+$handler->display->display_options['footer']['area']['field'] = 'area';
+$handler->display->display_options['footer']['area']['content'] = '<a href="cupcake-ranking-sales-pdf">Generar Pdf</a>';
+$handler->display->display_options['footer']['area']['format'] = 'filtered_html';
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+/* Relationship: Content: Cupcake Collection Nodes (cupcake_collections) */
+$handler->display->display_options['relationships']['cupcake_collections_value']['id'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['relationships']['cupcake_collections_value']['field'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['delta'] = '-1';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Field collection item: Cupcake */
+$handler->display->display_options['fields']['cupcake_collection_nodes']['id'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['table'] = 'field_data_cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['field'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['label'] = '';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['exclude'] = TRUE;
+$handler->display->display_options['fields']['cupcake_collection_nodes']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['cupcake_collection_nodes']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Field collection item: Quanty */
+$handler->display->display_options['fields']['cupcake_quanty']['id'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['table'] = 'field_data_cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['field'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['fields']['cupcake_quanty']['group_type'] = 'sum';
+$handler->display->display_options['fields']['cupcake_quanty']['label'] = '';
+$handler->display->display_options['fields']['cupcake_quanty']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['cupcake_quanty']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['path'] = 'cupcake-ranking-sales';
+
+/* Display: Monthly Sales(filter) PDF */
+$handler = $view->new_display('pdf', 'Monthly Sales(filter) PDF', 'pdf_1');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['style_plugin'] = 'pdf_table';
+$handler->display->display_options['style_options']['info'] = array(
+  'title' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+);
+$handler->display->display_options['style_options']['position'] = array(
+  'last_writing_position' => 1,
+  'x' => '',
+  'y' => '',
+  'width' => '',
+  'row_height' => '',
+);
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Consecutive';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Content: Cupcake Collection Nodes */
+$handler->display->display_options['fields']['cupcake_collections']['id'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['field'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['label'] = 'Cupcakes';
+$handler->display->display_options['fields']['cupcake_collections']['type'] = 'field_collection_fields';
+$handler->display->display_options['fields']['cupcake_collections']['settings'] = array(
+  'view_mode' => 'full',
+);
+$handler->display->display_options['fields']['cupcake_collections']['delta_offset'] = '0';
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['path'] = 'report/monthly-sales-pdf';
+
+/* Display: Monthly Sales(group) PDF */
+$handler = $view->new_display('pdf', 'Monthly Sales(group) PDF', 'pdf_2');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['style_plugin'] = 'pdf_table';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'php',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['info'] = array(
+  'title' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'cupcake_collections' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'purchase_client' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'purchase_date' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'purchase_total' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'php' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+);
+$handler->display->display_options['style_options']['position'] = array(
+  'last_writing_position' => 1,
+  'x' => '20',
+  'y' => '20',
+  'width' => '',
+  'row_height' => '',
+);
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Consecutive';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Content: Cupcake Collection Nodes */
+$handler->display->display_options['fields']['cupcake_collections']['id'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['field'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['label'] = 'Cupcakes';
+$handler->display->display_options['fields']['cupcake_collections']['type'] = 'field_collection_fields';
+$handler->display->display_options['fields']['cupcake_collections']['settings'] = array(
+  'view_mode' => 'full',
+);
+$handler->display->display_options['fields']['cupcake_collections']['delta_offset'] = '0';
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = 'Client';
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = 'Year-Month';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+
+$date = ($data->_field_data["nid"]["entity"]->purchase_date["und"][0]["value"]);
+$dates = explode(\'-\',$date);
+print $dates[0]." ".$dates[1]; 
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+$handler->display->display_options['path'] = 'report/monthly-sales-2-pdf';
+
+/* Display: Invoices by Client PDF */
+$handler = $view->new_display('pdf', 'Invoices by Client PDF', 'pdf_3');
+$handler->display->display_options['defaults']['group_by'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['pager']['options']['items_per_page'] = '0';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'pdf_table';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'purchase_client',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['info'] = array(
+  'purchase_client_1' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+);
+$handler->display->display_options['style_options']['position'] = array(
+  'last_writing_position' => 1,
+  'x' => '20',
+  'y' => '20',
+  'width' => '',
+  'row_height' => '',
+);
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = '';
+$handler->display->display_options['fields']['purchase_client']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client_1']['id'] = 'purchase_client_1';
+$handler->display->display_options['fields']['purchase_client_1']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client_1']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client_1']['group_type'] = 'count';
+$handler->display->display_options['fields']['purchase_client_1']['label'] = 'Total Invoices';
+$handler->display->display_options['fields']['purchase_client_1']['separator'] = ', ';
+$handler->display->display_options['path'] = 'report/invoices-by-client-pdf';
+
+/* Display: Inovices by Client (group) PDF */
+$handler = $view->new_display('pdf', 'Inovices by Client (group) PDF', 'pdf_4');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['style_plugin'] = 'pdf_table';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'purchase_client',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['style_options']['info'] = array(
+  'title' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'cupcake_collections' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'purchase_client' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'purchase_date' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+  'purchase_total' => array(
+    'header_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'body_style' => array(
+      'text' => array(
+        'font_size' => '',
+        'font_family' => 'default',
+        'font_style' => array(
+          'b' => 0,
+          'i' => 0,
+          'u' => 0,
+          'd' => 0,
+          'o' => 0,
+        ),
+        'align' => NULL,
+        'hyphenate' => NULL,
+        'color' => '',
+      ),
+      'render' => array(
+        'is_html' => 1,
+      ),
+    ),
+    'position' => array(
+      'width' => '',
+    ),
+  ),
+);
+$handler->display->display_options['style_options']['position'] = array(
+  'last_writing_position' => 1,
+  'x' => '20',
+  'y' => '20',
+  'width' => '',
+  'row_height' => '',
+);
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Consecutive';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Content: Cupcake Collection Nodes */
+$handler->display->display_options['fields']['cupcake_collections']['id'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['field'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['label'] = 'Cupcakes';
+$handler->display->display_options['fields']['cupcake_collections']['type'] = 'field_collection_fields';
+$handler->display->display_options['fields']['cupcake_collections']['settings'] = array(
+  'view_mode' => 'full',
+);
+$handler->display->display_options['fields']['cupcake_collections']['delta_offset'] = '0';
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = 'Client';
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['defaults']['filter_groups'] = FALSE;
+$handler->display->display_options['defaults']['filters'] = FALSE;
+/* Filter criterion: Content: Published */
+$handler->display->display_options['filters']['status']['id'] = 'status';
+$handler->display->display_options['filters']['status']['table'] = 'node';
+$handler->display->display_options['filters']['status']['field'] = 'status';
+$handler->display->display_options['filters']['status']['value'] = 1;
+$handler->display->display_options['filters']['status']['group'] = 1;
+$handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+/* Filter criterion: Content: Type */
+$handler->display->display_options['filters']['type']['id'] = 'type';
+$handler->display->display_options['filters']['type']['table'] = 'node';
+$handler->display->display_options['filters']['type']['field'] = 'type';
+$handler->display->display_options['filters']['type']['value'] = array(
+  'purchase' => 'purchase',
+);
+$handler->display->display_options['path'] = 'report/invoices-by-client-2-pdf';
+
+/* Display: cupcake-ranking-sales PDF */
+$handler = $view->new_display('pdf', 'cupcake-ranking-sales PDF', 'pdf_5');
+$handler->display->display_options['defaults']['group_by'] = FALSE;
+$handler->display->display_options['group_by'] = TRUE;
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['pager']['options']['items_per_page'] = '0';
+$handler->display->display_options['pager']['options']['offset'] = '0';
+$handler->display->display_options['style_plugin'] = 'pdf_unformatted';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'cupcake_collection_nodes',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['row_plugin'] = 'pdf_fields';
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+/* Relationship: Content: Cupcake Collection Nodes (cupcake_collections) */
+$handler->display->display_options['relationships']['cupcake_collections_value']['id'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['relationships']['cupcake_collections_value']['field'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['delta'] = '-1';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Field collection item: Cupcake */
+$handler->display->display_options['fields']['cupcake_collection_nodes']['id'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['table'] = 'field_data_cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['field'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['label'] = '';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['cupcake_collection_nodes']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Field collection item: Quanty */
+$handler->display->display_options['fields']['cupcake_quanty']['id'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['table'] = 'field_data_cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['field'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['fields']['cupcake_quanty']['group_type'] = 'sum';
+$handler->display->display_options['fields']['cupcake_quanty']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['path'] = 'report/cupcake-ranking-sales-pdf';
+
+/* Display: Monthly Sales(filter) XLS */
+$handler = $view->new_display('feed', 'Monthly Sales(filter) XLS', 'feed_1');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['style_plugin'] = 'xls';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = 'Consecutive';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+/* Field: Content: Cupcake Collection Nodes */
+$handler->display->display_options['fields']['cupcake_collections']['id'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['field'] = 'cupcake_collections';
+$handler->display->display_options['fields']['cupcake_collections']['type'] = 'field_collection_fields';
+$handler->display->display_options['fields']['cupcake_collections']['settings'] = array(
+  'view_mode' => 'full',
+);
+$handler->display->display_options['fields']['cupcake_collections']['delta_offset'] = '0';
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = 'Client';
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Purchase Total */
+$handler->display->display_options['fields']['purchase_total']['id'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['table'] = 'field_data_purchase_total';
+$handler->display->display_options['fields']['purchase_total']['field'] = 'purchase_total';
+$handler->display->display_options['fields']['purchase_total']['label'] = 'Total';
+$handler->display->display_options['fields']['purchase_total']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+$handler->display->display_options['path'] = 'report/monthly-sales-xls';
+
+/* Display: Invoice PDF */
+$handler = $view->new_display('pdf', 'Invoice PDF', 'pdf_6');
+$handler->display->display_options['defaults']['query'] = FALSE;
+$handler->display->display_options['query']['type'] = 'views_query';
+$handler->display->display_options['query']['options']['distinct'] = TRUE;
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['style_plugin'] = 'pdf_unformatted';
+$handler->display->display_options['style_options']['grouping'] = array(
+  0 => array(
+    'field' => 'title',
+    'rendered' => 1,
+    'rendered_strip' => 0,
+  ),
+);
+$handler->display->display_options['row_plugin'] = 'pdf_fields';
+$handler->display->display_options['row_options']['formats'] = array(
+  'title' => array(
+    'position' => array(
+      'object' => 'last_position',
+      'corner' => 'top_left',
+      'x' => '',
+      'y' => '',
+      'width' => '',
+      'height' => '',
+    ),
+    'text' => array(
+      'font_size' => '20px',
+      'font_family' => 'default',
+      'font_style' => array(
+        'b' => 'b',
+        'i' => 0,
+        'u' => 0,
+        'd' => 0,
+        'o' => 0,
+      ),
+      'align' => NULL,
+      'hyphenate' => NULL,
+      'color' => '',
+    ),
+    'render' => array(
+      'is_html' => 1,
+      'minimal_space' => '1',
+    ),
+  ),
+  'purchase_date' => array(
+    'position' => array(
+      'object' => 'last_position',
+      'corner' => 'top_right',
+      'x' => '',
+      'y' => '',
+      'width' => '',
+      'height' => '',
+    ),
+    'text' => array(
+      'font_size' => '',
+      'font_family' => 'default',
+      'font_style' => array(
+        'b' => 0,
+        'i' => 0,
+        'u' => 0,
+        'd' => 0,
+        'o' => 0,
+      ),
+      'align' => NULL,
+      'hyphenate' => NULL,
+      'color' => '',
+    ),
+    'render' => array(
+      'is_html' => 1,
+      'minimal_space' => '1',
+    ),
+  ),
+  'purchase_client' => array(
+    'position' => array(
+      'object' => 'last_position',
+      'corner' => 'top_left',
+      'x' => '',
+      'y' => '',
+      'width' => '',
+      'height' => '',
+    ),
+    'text' => array(
+      'font_size' => '',
+      'font_family' => 'default',
+      'font_style' => array(
+        'b' => 0,
+        'i' => 0,
+        'u' => 0,
+        'd' => 0,
+        'o' => 0,
+      ),
+      'align' => NULL,
+      'hyphenate' => NULL,
+      'color' => '',
+    ),
+    'render' => array(
+      'is_html' => 1,
+      'minimal_space' => '1',
+    ),
+  ),
+  'cupcake_collections' => array(
+    'position' => array(
+      'object' => 'last_position',
+      'corner' => 'top_left',
+      'x' => '',
+      'y' => '',
+      'width' => '',
+      'height' => '',
+    ),
+    'text' => array(
+      'font_size' => '',
+      'font_family' => 'default',
+      'font_style' => array(
+        'b' => 0,
+        'i' => 0,
+        'u' => 0,
+        'd' => 0,
+        'o' => 0,
+      ),
+      'align' => NULL,
+      'hyphenate' => NULL,
+      'color' => '',
+    ),
+    'render' => array(
+      'is_html' => 1,
+      'minimal_space' => '1',
+    ),
+  ),
+  'purchase_total' => array(
+    'position' => array(
+      'object' => 'last_position',
+      'corner' => 'top_left',
+      'x' => '',
+      'y' => '',
+      'width' => '',
+      'height' => '',
+    ),
+    'text' => array(
+      'font_size' => '',
+      'font_family' => 'default',
+      'font_style' => array(
+        'b' => 0,
+        'i' => 0,
+        'u' => 0,
+        'd' => 0,
+        'o' => 0,
+      ),
+      'align' => NULL,
+      'hyphenate' => NULL,
+      'color' => '',
+    ),
+    'render' => array(
+      'is_html' => 1,
+      'minimal_space' => '1',
+    ),
+  ),
+);
+$handler->display->display_options['row_options']['leading_template'] = '0';
+$handler->display->display_options['row_options']['template'] = '0';
+$handler->display->display_options['row_options']['succeed_template'] = '0';
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+/* Relationship: Content: Cupcake Collection Nodes (cupcake_collections) */
+$handler->display->display_options['relationships']['cupcake_collections_value']['id'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['relationships']['cupcake_collections_value']['field'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['delta'] = '-1';
+/* Relationship: Entity Reference: Referenced Entity */
+$handler->display->display_options['relationships']['purchase_client_target_id']['id'] = 'purchase_client_target_id';
+$handler->display->display_options['relationships']['purchase_client_target_id']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['relationships']['purchase_client_target_id']['field'] = 'purchase_client_target_id';
+/* Relationship: Entity Reference: Referenced Entity */
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['id'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['table'] = 'field_data_cupcake_collection_nodes';
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['field'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = '';
+$handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+$handler->display->display_options['fields']['title']['alter']['text'] = 'FACTURA No [title]';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+$handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+/* Field: Content: Purchase Date  */
+$handler->display->display_options['fields']['purchase_date']['id'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['table'] = 'field_data_purchase_date';
+$handler->display->display_options['fields']['purchase_date']['field'] = 'purchase_date';
+$handler->display->display_options['fields']['purchase_date']['label'] = 'Date ';
+$handler->display->display_options['fields']['purchase_date']['settings'] = array(
+  'format_type' => 'long',
+  'fromto' => 'both',
+  'multiple_number' => '',
+  'multiple_from' => '',
+  'multiple_to' => '',
+  'show_remaining_days' => 0,
+);
+/* Field: Content: Client identification */
+$handler->display->display_options['fields']['identification']['id'] = 'identification';
+$handler->display->display_options['fields']['identification']['table'] = 'field_data_identification';
+$handler->display->display_options['fields']['identification']['field'] = 'identification';
+$handler->display->display_options['fields']['identification']['relationship'] = 'purchase_client_target_id';
+$handler->display->display_options['fields']['identification']['label'] = 'Identification';
+$handler->display->display_options['fields']['identification']['settings'] = array(
+  'thousand_separator' => ',',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Purchase Client */
+$handler->display->display_options['fields']['purchase_client']['id'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['table'] = 'field_data_purchase_client';
+$handler->display->display_options['fields']['purchase_client']['field'] = 'purchase_client';
+$handler->display->display_options['fields']['purchase_client']['label'] = 'Client';
+$handler->display->display_options['fields']['purchase_client']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Content: Client Last Name */
+$handler->display->display_options['fields']['client_last_name']['id'] = 'client_last_name';
+$handler->display->display_options['fields']['client_last_name']['table'] = 'field_data_client_last_name';
+$handler->display->display_options['fields']['client_last_name']['field'] = 'client_last_name';
+$handler->display->display_options['fields']['client_last_name']['relationship'] = 'purchase_client_target_id';
+$handler->display->display_options['fields']['client_last_name']['label'] = 'Last Name';
+/* Field: Field collection item: Cupcake */
+$handler->display->display_options['fields']['cupcake_collection_nodes']['id'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['table'] = 'field_data_cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['field'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['element_label_colon'] = FALSE;
+$handler->display->display_options['fields']['cupcake_collection_nodes']['settings'] = array(
+  'link' => 0,
+);
+/* Field: Field collection item: Quanty */
+$handler->display->display_options['fields']['cupcake_quanty']['id'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['table'] = 'field_data_cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['field'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['fields']['cupcake_quanty']['settings'] = array(
+  'thousand_separator' => '.',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Cupcake Price */
+$handler->display->display_options['fields']['price']['id'] = 'price';
+$handler->display->display_options['fields']['price']['table'] = 'field_data_price';
+$handler->display->display_options['fields']['price']['field'] = 'price';
+$handler->display->display_options['fields']['price']['relationship'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['fields']['price']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Cupcake Discount */
+$handler->display->display_options['fields']['discount']['id'] = 'discount';
+$handler->display->display_options['fields']['discount']['table'] = 'field_data_discount';
+$handler->display->display_options['fields']['discount']['field'] = 'discount';
+$handler->display->display_options['fields']['discount']['relationship'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['fields']['discount']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['label'] = 'Subtotal';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+$price = $data->_field_data[\'node_field_data_cupcake_collection_nodes_nid\'][\'entity\']->price[\'und\'][0][\'value\'];
+$discount = $data->_field_data[\'node_field_data_cupcake_collection_nodes_nid\'][\'entity\']->discount[\'und\'][0][\'value\'];
+$quanty = $data->field_cupcake_quanty[0][\'raw\'][\'value\'];
+$subtotal = ($price*$quanty)-($discount*$quanty);
+print $subtotal;
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+$handler->display->display_options['defaults']['arguments'] = FALSE;
+/* Contextual filter: Content: Nid */
+$handler->display->display_options['arguments']['nid']['id'] = 'nid';
+$handler->display->display_options['arguments']['nid']['table'] = 'node';
+$handler->display->display_options['arguments']['nid']['field'] = 'nid';
+$handler->display->display_options['arguments']['nid']['default_action'] = 'not found';
+$handler->display->display_options['arguments']['nid']['default_argument_type'] = 'fixed';
+$handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+$handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+$handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+$handler->display->display_options['path'] = 'invoice-pdf/%';
+
+/* Display: Page 5 */
+$handler = $view->new_display('page', 'Page 5', 'page_5');
+$handler->display->display_options['defaults']['relationships'] = FALSE;
+/* Relationship: Content: Cupcake Collection Nodes (cupcake_collections) */
+$handler->display->display_options['relationships']['cupcake_collections_value']['id'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['table'] = 'field_data_cupcake_collections';
+$handler->display->display_options['relationships']['cupcake_collections_value']['field'] = 'cupcake_collections_value';
+$handler->display->display_options['relationships']['cupcake_collections_value']['delta'] = '-1';
+/* Relationship: Entity Reference: Referenced Entity */
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['id'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['table'] = 'field_data_cupcake_collection_nodes';
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['field'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['relationships']['cupcake_collection_nodes_target_id']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['defaults']['fields'] = FALSE;
+/* Field: Content: Title */
+$handler->display->display_options['fields']['title']['id'] = 'title';
+$handler->display->display_options['fields']['title']['table'] = 'node';
+$handler->display->display_options['fields']['title']['field'] = 'title';
+$handler->display->display_options['fields']['title']['label'] = '';
+$handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+$handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+/* Field: Field collection item: Cupcake */
+$handler->display->display_options['fields']['cupcake_collection_nodes']['id'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['table'] = 'field_data_cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['field'] = 'cupcake_collection_nodes';
+$handler->display->display_options['fields']['cupcake_collection_nodes']['relationship'] = 'cupcake_collections_value';
+/* Field: Field collection item: Quanty */
+$handler->display->display_options['fields']['cupcake_quanty']['id'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['table'] = 'field_data_cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['field'] = 'cupcake_quanty';
+$handler->display->display_options['fields']['cupcake_quanty']['relationship'] = 'cupcake_collections_value';
+$handler->display->display_options['fields']['cupcake_quanty']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Cupcake Price */
+$handler->display->display_options['fields']['price']['id'] = 'price';
+$handler->display->display_options['fields']['price']['table'] = 'field_data_price';
+$handler->display->display_options['fields']['price']['field'] = 'price';
+$handler->display->display_options['fields']['price']['relationship'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['fields']['price']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Content: Cupcake Discount */
+$handler->display->display_options['fields']['discount']['id'] = 'discount';
+$handler->display->display_options['fields']['discount']['table'] = 'field_data_discount';
+$handler->display->display_options['fields']['discount']['field'] = 'discount';
+$handler->display->display_options['fields']['discount']['relationship'] = 'cupcake_collection_nodes_target_id';
+$handler->display->display_options['fields']['discount']['settings'] = array(
+  'thousand_separator' => '',
+  'prefix_suffix' => 1,
+);
+/* Field: Global: PHP */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_output'] = '<?php
+$price = $data->_field_data[\'node_field_data_cupcake_collection_nodes_nid\'][\'entity\']->price[\'und\'][0][\'value\'];
+$discount = $data->_field_data[\'node_field_data_cupcake_collection_nodes_nid\'][\'entity\']->discount[\'und\'][0][\'value\'];
+$quanty = $data->field_cupcake_quanty[0][\'raw\'][\'value\'];
+dpm($data->_field_cupcake_quanty[0][\'raw\'][\'value\']);
+print $price." ".$discount." ".$quanty;
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+$handler->display->display_options['path'] = 'test';
+
+/* Display: Invoices by Client XLS */
+$handler = $view->new_display('feed', 'Invoices by Client XLS', 'feed_2');
+$handler->display->display_options['pager']['type'] = 'some';
+$handler->display->display_options['style_plugin'] = 'xls';
+$handler->display->display_options['path'] = 'report/invoices-by-client-xls';

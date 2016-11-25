@@ -1,0 +1,688 @@
+<?php
+
+function cupcake_enable() { 
+
+	$t = get_t();
+
+	// Create Vocabulary Ingredents
+
+	$taxonomy = array(
+    	'name' => 'Ingredents',
+    	'machine_name' => 'ingredents',
+    	'description' => t('Vocabulary of ingredients'),
+    	'module' => 'taxonomy',
+    	'hierarchy' => 0,
+  	);
+  	taxonomy_vocabulary_save((object) $taxonomy);
+
+	// Define the cupcake content type
+
+	$content_type = array(
+		'type'=>'Cupcake',
+		'name'=>$t('cupcake'),
+		'description'=>$t('Create a new Cupcake'),
+		'title_label'=>$t('Cupcake'),
+		'base'=>'node_content',
+		'custom'=>TRUE,
+	);
+
+	$node_type = node_type_set_defaults($content_type);
+	node_type_save($node_type);
+
+	// Create new fields
+
+	$fields = array(
+
+		// Description field
+		'Cupcake_description' => array(
+			'field_name' => 'description',
+			'type' => 'text_long',
+			'cardinality' => 1,
+		),
+
+		//ingredents field
+		'cupcake_ingredents' => array(
+			'field_name' => 'cupcake_ingredents',
+			'type' => 'taxonomy_term_reference',
+			'cardinality' => -1,
+			'settings' => arraY(
+					'allowed_values' => array(
+						array(
+							'vocabulary' => 'ingredents',
+							'parent' => 0,
+						),
+					),
+			),
+
+		),
+
+		// Photo field
+		'Cupcake_photo' => array(
+			'field_name' => 'photo',
+			'type' => 'image',
+			'cardinality' => 1,
+		),
+
+		// Price field
+		'Cupcake_price' => array(
+			'field_name' => 'price',
+			'type' => 'number_integer',
+			'cardinality' => 1,
+		),
+
+		// Discount field
+
+		'Cupcake_discount' => array(
+			'field_name' => 'discount',
+			'type' => 'number_integer',
+			'cardinality' => 1
+		),
+
+	);
+
+	foreach($fields as $field) {
+		field_create_field($field);
+	}
+
+	//attach fields to cupcake type
+
+	$instances = array(
+		// Description
+		'Cupcake_description' => array(
+			'field_name' => 'description',
+			'label' => $t('Cupcake Description'),
+			'entity_type' => 'node',
+			'bundle' => 'cupcake',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textarea'
+			),
+		),
+
+		//Ingredents
+		'cupcake_ingredents' => array(
+			'field_name' => 'cupcake_ingredents',
+			'label' => $t('Cupcake Ingredents'),		
+			'entity_type' => 'node',
+			'bundle' => 'cupcake',			
+			'description'=> t('Cupcake Ingredents'),
+			'required' => true,
+			'widget' => array(
+				'type' => 'option_select',
+			),
+		),
+
+
+		//image
+		'Cupcake_photo' => array(
+			'field_name' => 'photo',
+			'label' => $t('Cupcake Photo'),
+			'entity_type' => 'node',
+			'bundle' => 'cupcake',
+			'required' => TRUE,
+			'settings' => array(
+    				'file_extensions' => 'png jpg jpeg',
+    				'file_directory' => '',
+    				'max_filesize' => '20 MB',
+    				'alt_field' => 1,
+    				'title_field' => 1,
+    				'max_resolution' => '300x200',
+    				'min_resolution' => '200x125',
+    				'default_image' => 0,
+  			),
+		),
+		
+		// Price
+		'Cupcake_price' => array(
+			'field_name' => 'price',
+			'label' => $t('Cupcake Price'),
+			'entity_type' => 'node',
+			'bundle' => 'cupcake',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+		// Discounts
+		'Cupcake_discount' => array(
+			'field_name' => 'discount',
+			'label' => $t('Cupcake Discount'),
+			'entity_type' => 'node',
+			'bundle' => 'cupcake',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+	);
+
+	foreach($instances as $instance) {
+		$instance['entity_field'] = 'node';
+		$instance['bundle'] = 'cupcake';
+
+		field_create_instance($instance);
+	}
+
+	// Define the client content type
+
+	$content_type_client = array(
+		'type'=>'client',
+		'name'=>$t('client'),
+		'description'=>$t('Create a new Client'),
+		'title_label'=>$t('Client'),
+		'base'=>'node_content',
+		'custom'=>TRUE,
+	);
+
+	$node_type = node_type_set_defaults($content_type_client);
+	node_type_save($node_type);
+
+
+	// Create new fields
+
+	$fields_client = array(
+
+		// Description field
+		'Client_identification' => array(
+			'field_name' => 'identification',
+			'type' => 'number_bigint',
+			'cardinality' => 1,
+		),
+
+		// Name field
+		'Client_name' => array(
+			'field_name' => 'client_name',
+			'type' => 'text',
+			'cardinality' => 1,
+		),
+
+		// Last Name field
+		'Client_last_name' => array(
+			'field_name' => 'client_last_name',
+			'type' => 'text',
+			'cardinality' => 1,
+		),
+
+		// Tel field
+		'Client_tel' => array(
+			'field_name' => 'client_tel',
+			'type' => 'text',
+			'cardinality' => 1,
+		),
+
+		// Cel field
+		'Client_cel' => array(
+			'field_name' => 'client_cel',
+			'type' => 'number_bigint',
+			'cardinality' => 1,
+		),
+
+		// Addres field
+		'Client_addres' => array(
+			'field_name' => 'client_addres',
+			'type' => 'text',
+			'cardinality' => 1,
+		),
+
+		// Email field
+		'Client_email' => array(
+			'field_name' => 'client_email',
+			'type' => 'email',
+			'cardinality' => 1,
+		),
+	);
+
+	foreach($fields_client as $field) {
+		field_create_field($field);
+	}
+
+	//attach fields to cupcake type
+
+	$instances_client = array(
+		// Description
+		'Client_identification' => array(
+			'field_name' => 'identification',
+			'label' => $t('Client identification'),
+			'entity_type' => 'node',
+			'bundle' => 'client',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+		// Name
+		'Client_name' => array(
+			'field_name' => 'client_name',
+			'label' => $t('Client Name'),
+			'entity_type' => 'node',
+			'bundle' => 'client',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+		// Last Name
+		'Client_last_name' => array(
+			'field_name' => 'client_last_name',
+			'label' => $t('Client Last Name'),
+			'entity_type' => 'node',
+			'bundle' => 'client',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+		// Tel
+		'Client_tel' => array(
+			'field_name' => 'client_tel',
+			'label' => $t('Client Tel'),
+			'entity_type' => 'node',
+			'bundle' => 'client',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+		// Cel
+		'Client_cel' => array(
+			'field_name' => 'client_cel',
+			'label' => $t('Client Cel'),
+			'entity_type' => 'node',
+			'bundle' => 'client',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+		// Addres
+		'Client_addres' => array(
+			'field_name' => 'client_addres',
+			'label' => $t('Client Addres'),
+			'entity_type' => 'node',
+			'bundle' => 'client',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+		// Email
+		'Client_email' => array(
+			'field_name' => 'client_email',
+			'label' => $t('Client Email'),
+			'entity_type' => 'node',
+			'bundle' => 'client',
+			'required' => TRUE,
+			'widget' =>array(
+				'type' => 'textfield'
+			),
+		),
+
+	);
+
+	foreach($instances_client as $instance) {
+		$instance['entity_field'] = 'node';
+		$instance['bundle'] = 'client';
+
+		field_create_instance($instance);
+	}
+
+	// Define the Purchase content type
+
+	$content_type_purchase = array(
+		'type'=>'purchase',
+		'name'=>$t('purchase'),
+		'description'=>$t('Create a new Purchase'),
+		'title_label'=>$t('Consecutive'),
+		'base'=>'node_content',
+		'custom'=>TRUE,
+	);
+
+	$node_type = node_type_set_defaults($content_type_purchase);
+	node_type_save($node_type);
+ 
+	  $fields_array = array(
+	    array(
+	      'field' => array(
+	        'field_name' => 'cupcake_collections',
+	        'label' => $t('Cupcake Collection Nodes'),
+	        'cardinality' => -1,
+	        'type' => 'field_collection',
+	      ),
+	      'instance' => array(
+	        'field_name' => 'cupcake_collections',
+	        'entity_type' => 'node',
+	        'bundle' => 'purchase',
+	        'label' => $t('Cupcake Collection Nodes'),
+	        'description' => '',
+	        'widget' => array('type' => 'field_collection_embed'),
+	        'required' => 1,
+	      ),
+	    ),
+	    array(
+	      'field' => array(
+	        'field_name' => 'cupcake_collection_nodes',
+	        'type' => 'entityreference',
+	        'label' => '',
+	        'cardinality' => 1,
+	        'settings' => array(
+	          'target_type' => 'node',
+	      	  'handler_settings' => array('target_bundles' => array('cupcake')),
+	        ),
+	      ),
+	      'instance' => array(
+	        'field_name' => 'cupcake_collection_nodes',
+	        'entity_type' => 'field_collection_item',
+	        'bundle' => 'cupcake_collections',
+	        'label' => 'Cupcake',
+	        'cardinality' => 1,
+	        'description' => '',
+	        'widget' => array(
+	        	'type' => 'option_select'
+	        ),
+	        
+	      )
+	    ),
+	    array(
+	      'field' => array(
+	        'field_name' => 'cupcake_quanty',
+	        'type' => 'number_integer',        
+	        'cardinality' => 1,        
+	      ),
+	      'instance' => array(
+	        'field_name' => 'cupcake_quanty',
+	        'entity_type' => 'field_collection_item',
+	        'bundle' => 'cupcake_collections',
+	        'label' => 'Quanty',
+	        'cardinality' => 1,
+	        'description' => '',
+	        'widget' => array(
+	        	'type' => 'textfield'
+	        ),
+	        
+	      )
+	    ),
+	    array(
+	      'field' => array(
+	        'field_name' => 'purchase_date',
+	        'type' => 'datetime',        
+	        'cardinality' => 1,        
+	      ),
+	      'instance' => array(
+	        'field_name' => 'purchase_date',
+	        'entity_type' => 'node',
+	        'bundle' => 'purchase',
+	        'label' => 'Purchase Date ',
+	        'cardinality' => 1,
+	        'description' => '',
+	        'widget' => array(
+	        	'type' => 'date_popup'
+	        ),
+	        
+	      )
+	    ),
+	    array(
+	      'field' => array(
+	        'field_name' => 'purchase_client',
+	        'type' => 'entityreference',        
+	        'cardinality' => 1,   
+	        'settings' => array(
+	          'target_type' => 'node',
+	      	  'handler_settings' => array('target_bundles' => array('client')),
+	        ),     
+	      ),
+	      'instance' => array(
+	        'field_name' => 'purchase_client',
+	        'entity_type' => 'node',
+	        'bundle' => 'purchase',
+	        'label' => 'Purchase Client',
+	        'cardinality' => 1,
+	        'description' => '',
+	        'widget' => array(
+	        	'type' => 'option_select'
+	        ),
+	        
+	      )
+	    ),
+	    array(
+	      'field' => array(
+	        'field_name' => 'purchase_total',
+	        'type' => 'number_integer',        
+	        'cardinality' => 1,              
+	      ),
+	      'instance' => array(
+	        'field_name' => 'purchase_total',
+	        'entity_type' => 'node',
+	        'bundle' => 'purchase',
+	        'label' => 'Purchase Total',
+	        'cardinality' => 1,
+	        'description' => '',
+	        'widget' => array(
+	        	'type' => 'textfield'
+	        ),        
+	      )
+	    ),
+
+	  );
+	  
+	  // Loop through fields array and create field and instance
+	  foreach ($fields_array as $field) {
+	    // Check if field already exists
+	    if (!field_info_field($field['field']['field_name'])) {
+	      field_create_field($field['field']);
+	    }
+
+	    // Check if instance exists
+	    if (!field_info_instance($field['instance']['entity_type'], $field['instance']['field_name'], $field['instance']['bundle'])) {
+	      field_create_instance($field['instance']);
+	    }
+	  }
+
+	  //Create Roles
+
+	  _add_role("regular_employer");
+	  _add_role("cupcake_administrator");
+
+	  //Create Test Data
+
+	  _create_users();
+	  _create_cupcake();
+	  _create_terms();
+	  
+}
+		
+function cupcake_disable() {
+
+	// Delete Cupcake roles //
+
+	user_role_delete("regular_employer");
+	user_role_delete("cupcake_administrator"); 
+
+	// Delete Cupcake Menu //
+
+	menu_delete(menu_load('cupcake_menu'));
+	  menu_delete_links($menu['navigation']);
+	// Remove existing content
+ 
+	$query = 'SELECT nid ';
+	$query .= 'FROM {node} ';
+	$query .= 'WHERE {node}.type = :type ';
+	
+	$result = db_query( $query, array(':type'	=> 'cupcake') );
+ 
+	$nids = array();
+ 
+	foreach( $result as $row ) {
+ 
+		$nids[] = $row->nid;
+ 
+	}
+ 
+	node_delete_multiple( $nids );
+	
+	// Delete fields and instances
+ 
+	foreach( field_info_instances('node', 'cupcake') as $field_name	=> $instance ) {
+ 
+		field_delete_instance($instance);
+ 
+	}
+ 
+	// Delete content type
+ 
+	node_type_delete('cupcake');
+ 
+	// Remove existing content
+ 
+	$query = 'SELECT nid ';
+	$query .= 'FROM {node} ';
+	$query .= 'WHERE {node}.type = :type ';
+	
+	$result = db_query( $query, array(':type'	=> 'client') );
+ 
+	$nids = array();
+ 
+	foreach( $result as $row ) {
+ 
+		$nids[] = $row->nid;
+ 
+	}
+ 
+	node_delete_multiple( $nids );
+	
+	// Delete fields and instances
+ 
+	foreach( field_info_instances('node', 'client') as $field_name	=> $instance ) {
+ 
+		field_delete_instance($instance);
+ 
+	}
+ 
+	// Delete content type
+ 
+	node_type_delete('client');
+ 
+
+	// Purge field batch
+ 
+	
+
+	$term = taxonomy_vocabulary_machine_name_load('ingredents');
+	taxonomy_vocabulary_delete($term->vid);
+
+	$query = 'SELECT nid ';
+	$query .= 'FROM {node} ';
+	$query .= 'WHERE {node}.type = :type ';
+	
+	$result = db_query( $query, array(':type'	=> 'purchase') );
+ 
+	$nids = array();
+ 
+	foreach( $result as $row ) {
+ 
+		$nids[] = $row->nid;
+ 
+	}
+ 
+	node_delete_multiple( $nids );
+	
+	// Delete fields and instances
+ 
+	foreach( field_info_instances('node', 'purchase') as $field_name	=> $instance ) {
+ 
+		field_delete_instance($instance);
+ 
+	}
+ 
+	// Delete content type
+ 
+	node_type_delete('purchase');
+	field_purge_batch(1000); // Purge delete fields data
+
+}
+
+function _add_role($machine_name, $weight = 0)  {
+	$role = new stdClass();
+	$role->name = $machine_name;
+	$role->weight = $weight;
+	user_role_save($role);
+}
+
+function _create_terms() {
+  $ingredents =array("sugar","butter","eggs","milk","chocolate","orange","vanilla","apples");
+  $vocabulary = taxonomy_vocabulary_machine_name_load("ingredents");
+  $vid = $vocabulary->vid;
+  foreach ($ingredents as $ingrident) {
+    $term = new stdClass();   
+    $term->vid = $vid;
+    $term->name = $ingrident ;      
+    taxonomy_term_save($term);
+  }
+  
+}
+
+function _create_cupcake() {
+  global $user;
+  $cupcakes = array("Tropical","Chocolate","Vanilla","Classic","Red Fruits","Lemon","Orange");
+  $description = "Cupcake example";
+  $prices = array(20000,30000,15000,10000,25000,5000,35000);
+  $discounts = array(2000,3000,1500,1000,2500,500,3500);
+  $aux = 0;  
+
+  foreach ($cupcakes as $cupcake) {
+    $cupcake_n = new stdClass();
+    $cupcake_n->title = $cupcake;
+    $cupcake_n->type = "Cupcake";
+    $cupcake_n->description['und'][0]['value'] = $description;
+    $cupcake_n->cupcake_ingredents['und'][0]['tid'] = 23;  
+
+    $filepath = drupal_realpath('public://'.$cupcake.'.jpg');    
+    $file = (object) array(
+      'uid' => 1,
+      'uri' => $filepath,
+      'filemime' => file_get_mimetype($filepath),
+      'status' => 1,
+    );    
+
+    $file = file_copy($file, 'public://');    
+    $cupcake_n->photo['und'][0] = (array)$file;
+    $cupcake_n->price['und'][0]['value'] = $prices[$aux];
+    $cupcake_n->discount['und'][0]['value'] = $discounts[$aux];
+    $aux++;
+    node_save($cupcake_n);
+  }    
+}
+
+function _create_users(){
+  $regular_role= user_role_load_by_name('regular_employer');
+  $cupcake_admin_role= user_role_load_by_name('cupcake_administrator');  
+  $user = array(
+        'name' => 'oscar',
+        'pass' => 'oscar123',
+        'mail' => 'opregonerog@gmail.com',
+        'status' => 1,
+        'roles' => array(
+          DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+          $cupcake_admin_role->rid => 'cupcake_administrator',
+        )
+  );
+  user_save(NULL, $user);
+  $user = array(
+        'name' => 'vanessa',
+        'pass' => 'vanessa123',
+        'mail' => 'lizvane3@gmail.com',
+        'status' => 1,
+        'roles' => array(
+          DRUPAL_AUTHENTICATED_RID => 'authenticated user',
+          $regular_role->rid => 'regular_employer',
+        )
+  );
+  user_save(NULL, $user);
+}
+
